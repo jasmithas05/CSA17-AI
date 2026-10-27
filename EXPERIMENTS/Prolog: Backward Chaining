@@ -1,0 +1,14 @@
+fact(fever).
+fact(cough).
+
+rule(flu) :-
+    fact(fever),
+    fact(cough).
+
+rule(rest_needed) :-
+    rule(flu).
+
+% Queries:
+% ?- rule(flu).
+% ?- rule(rest_needed).
+% ?- rule(unknown).
