@@ -1,0 +1,19 @@
+from textblob import TextBlob
+
+sentences = [
+    "I love this product",
+    "This product is terrible",
+    "The product is okay"
+]
+
+for sentence in sentences:
+    score = TextBlob(sentence).sentiment.polarity
+
+    if score > 0:
+        sentiment = "Positive"
+    elif score < 0:
+        sentiment = "Negative"
+    else:
+        sentiment = "Neutral"
+
+    print(sentence, ":", sentiment)
