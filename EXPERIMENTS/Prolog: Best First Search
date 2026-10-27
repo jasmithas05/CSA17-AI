@@ -1,0 +1,25 @@
+edge(a, b, 4).
+edge(a, c, 2).
+edge(b, d, 5).
+edge(c, d, 1).
+edge(c, e, 6).
+edge(d, e, 3).
+
+best_first(Start, Goal) :-
+    search([[0, Start, [Start]]], Goal).
+
+search([[_, Goal, Path]|_], Goal) :-
+    reverse(Path, Result),
+    write('Path: '), write(Result), nl.
+
+search([[Cost, Node, Path]|Rest], Goal) :-
+    findall([NewCost, Next, [Next|Path]],
+        (edge(Node, Next, Weight),
+         \+ member(Next, Path),
+         NewCost is Cost + Weight),
+        Children),
+    append(Rest, Children, Queue),
+    sort(Queue, SortedQueue),
+    search(SortedQueue, Goal).
+
+% Query: ?- best_first(a, e).
