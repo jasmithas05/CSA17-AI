@@ -1,0 +1,9 @@
+from sklearn.tree import DecisionTreeClassifier
+
+X = [[20], [25], [30], [35], [40]]
+y = ["No", "No", "Yes", "Yes", "Yes"]
+
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X, y)
+
+print("Prediction:", model.predict([[28]])[0])
