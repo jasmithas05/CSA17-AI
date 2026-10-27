@@ -1,0 +1,20 @@
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+
+ratings = np.array([
+    [5, 4, 0, 1],
+    [4, 5, 0, 2],
+    [1, 0, 5, 4],
+    [0, 1, 4, 5]
+])
+
+similarity = cosine_similarity(ratings)
+
+user = 0
+scores = similarity[user] @ ratings
+scores = scores / (similarity[user].sum() + 1e-9)
+
+unrated = np.where(ratings[user] == 0)[0]
+recommended = unrated[np.argmax(scores[unrated])]
+
+print("Recommended Item:", recommended + 1)
